@@ -1,0 +1,90 @@
+version: '3'
+services:
+ db2:
+    image: ibmcom/db2express-c:latest
+    command: ["db2start"]
+    environment:
+        - DB2INST1_PASSWORD=db2inst1-pwd
+        - LICENSE=accept
+    networks:
+     - backend
+    volumes:
+      - db2-driver:/home/db2inst1/sqllib/java
+      - D:/docker/IBM:/mnt/share
+      
+ mq:
+    # sudo sysctl fs.file-max=524288
+    # https://github.com/ibm-messaging/mq-docker
+    image: ibmcom/mq:latest
+    environment:
+        - LICENSE=accept
+        - MQ_QMGR_NAME= QM1
+        - MQ_DEV=false
+        - MQ_ADMIN_PASSWORD=passw0rd
+#        - MQ_APP_PASSWORD=
+# MQ_TLS_KEYSTORE MQ_TLS_PASSPHRASE 
+        - MQ_DISABLE_WEB_CONSOLE=false
+    ports:
+     - "50000:50000"
+     - "1414:1414"
+     - "1515:1515"
+    expose:
+     - "5000"
+    volumes:
+      - D:/docker/IBM:/mnt/share
+      # - qm1data:/mnt/mqm
+      # - serverlog:/log
+    networks:
+     - backend
+     
+ ldap:
+    # https://github.com/openmicroscopy/apacheds-docker
+    # admin user uid=admin,ou=system and password secret. The default instance comes with a pre-configured partition dc=openmicroscopy,dc=org.
+    image: openmicroscopy/apacheds
+    environment:
+        - APACHEDS_INSTANCE=default
+    ports:
+     - "389:10389"
+    volumes:
+      # - /path/to/your/config.ldif:/bootstrap/conf/config.ldif:ro
+      - D:/docker/IBM:/mnt/share
+    networks:
+     - backend
+     
+ was:
+    # https://hub.docker.com/r/ibmcom/websphere-traditional/ 
+    # docker exec ibm_was_1 cat /tmp/PASSWORD 
+    #  https://localhost:9043/ibm/console/login.do?action=secure
+    #  image: ibmcom/websphere-traditional:9.0.0.6-install
+    #  image: ibmcom/websphere-traditional:9.0.0.6-profile, latest
+    image: ibmcom/websphere-traditional:latest
+    environment:    
+      - PROFILE_NAME=AppSrv01 
+      - CELL_NAME=DefaultCell01 
+      - NODE_NAME=DefaultNode01
+      - HOST_NAME=localhost
+    ports:
+      - "9043:9043"
+      - "9443:9443"
+      - "9080:9080"    
+    depends_on:
+      - db2
+    volumes:
+      - db2-driver:/db2
+      - D:/docker/IBM:/mnt/share
+    networks:
+     - backend
+     
+     
+ # ihs:
+   # image: ibmcom/ibm-http-server
+   # ports:
+     # - 80:80
+    
+    
+volumes:
+    db2-driver: 
+         
+networks:
+    backend:
+        driver: bridge
