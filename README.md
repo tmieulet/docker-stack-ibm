@@ -2,6 +2,13 @@
 
 Just comment unnecessary containers.
 
+You can use [openldap](https://hub.docker.com/r/osixia/openldap/) instead of apacheds.  
+
+Next steps:
+1. new branch to deploy some applications.
+1. new branch to configure HADR.
+1. new branch with Dynatrace [for example](https://github.com/dynatrace-innovationlab/easyTravel-Docker/blob/master/docker-compose-withDtAppMon.yml).
+
 Following containers are missing (For licensing reasons):
 * The WebSphere Application Server Network Deployment (dmgr)
 
@@ -10,6 +17,14 @@ https://developer.ibm.com/recipes/tutorials/how-to-configure-ibm-websphere-appli
 
 https://developer.ibm.com/digexp/docs/docs/customization-administration/ibm-digital-experience-on-docker-containers/
 
+## Tools
+* MQ:
+MQ explorer, rfhutil or HermesJMS 
+* LDAP: 
+[jxplorer](http://jxplorer.org/index.html)
+* WAS: 
+*TODO: find a librarie to deploy applications, create resources, ...*
+* DB2: [SQuirreL](https://www.ibm.com/developerworks/data/library/techarticle/dm-0312bhogal/index.html)
 
 ## docker commands
 
