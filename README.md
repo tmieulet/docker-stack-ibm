@@ -23,7 +23,7 @@ MQ explorer, rfhutil or HermesJMS
 * LDAP: 
 [jxplorer](http://jxplorer.org/index.html)
 * WAS: 
-*TODO: find a librarie to deploy applications, create resources, ...*
+*TODO: find a Jython script library to deploy applications, create resources, ...*
 * DB2: [SQuirreL](https://www.ibm.com/developerworks/data/library/techarticle/dm-0312bhogal/index.html)
 
 ## docker commands
