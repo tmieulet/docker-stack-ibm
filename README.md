@@ -24,6 +24,9 @@ MQ explorer, rfhutil or HermesJMS
 [jxplorer](http://jxplorer.org/index.html)
 * WAS: 
 *TODO: find a Jython script library to deploy applications, create resources, ...*
+
+run Configure_MQRA.py to change MQ configuration. see 
+[here](https://www.ibm.com/developerworks/websphere/library/techarticles/1308_broadhurst/1308_broadhurst.html)
 * DB2: [SQuirreL](https://www.ibm.com/developerworks/data/library/techarticle/dm-0312bhogal/index.html)
 
 ## docker commands
